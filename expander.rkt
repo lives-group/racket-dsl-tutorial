@@ -1,7 +1,6 @@
 #lang racket
 
-(require (for-syntax syntax/parse
-                     racket)
+(require (for-syntax racket)
          br/macro)
   
 
@@ -10,13 +9,10 @@
      (to-nat 'EXPR)))
 
 (define (to-nat e)
-  (define (peano n)
-    (cond
-      [(eq? 'expr (car n)) (peano (cdr n))]
-      [(eq? 'ZERO (car n)) 0]      
-      [(eq? 'SUCC (car n)) (add1 (peano (cdr n)))]))
-  (peano e))
-      
+  (match e
+    [(cons 'expr e1) (to-nat e1)]
+    [(cons 'ZERO _)  0]
+    [(cons 'SUCC e1) (add1 (to-nat e1))]))
 
 (provide (rename-out [arith-mb #%module-begin])
          #%top-interaction
