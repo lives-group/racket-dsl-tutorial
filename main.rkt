@@ -1,13 +1,15 @@
 #lang racket
 
-(require arith/syntax
-         arith/tokenizer
+(require arith/parser/arith
+         arith/parser/tokenizer
          syntax/strip-context)
 
 (define (read-syntax path port)
-  (define parse-tree (parse path (make-tokenizer port path)))
+  (define parse-tree
+    (parse path
+           (make-tokenizer port path)))
   (strip-context
-   #`(module arith-mod arith/expander
+   #`(module arith-mod arith/expander/expander
        #,parse-tree)))
 
 (module+ reader
