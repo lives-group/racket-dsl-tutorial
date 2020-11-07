@@ -8,6 +8,8 @@
    [whitespace (token lexeme #:skip? #t)]
    ["ZERO" (token lexeme 'ZERO)]
    ["SUCC" (token lexeme 'SUCC)]
+   ["PRED" (token lexeme 'PRED)]
+   ["ISZERO" (token lexeme 'ISZERO)]
    [(:or "(" ")") (token lexeme lexeme)]))
 
 (provide basic-lexer)

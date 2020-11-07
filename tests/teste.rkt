@@ -1,3 +1,3 @@
 #lang arith
 
-SUCC (SUCC (SUCC ZERO))
+ISZERO (PRED (SUCC ZERO))
