@@ -10,6 +10,9 @@
    ["SUCC" (token lexeme 'SUCC)]
    ["PRED" (token lexeme 'PRED)]
    ["ISZERO" (token lexeme 'ISZERO)]
+   ["IF" (token lexeme 'IF)]
+   ["THEN" (token lexeme 'THEN)]
+   ["ELSE" (token lexeme 'ELSE)]
    [(:or "(" ")") (token lexeme lexeme)]))
 
 (provide basic-lexer)

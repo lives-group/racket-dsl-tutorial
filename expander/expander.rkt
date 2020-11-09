@@ -6,18 +6,22 @@
 
 (define-macro (arith-mb EXPR)
   #'(#%module-begin
-     (to-nat 'EXPR)))
+     'EXPR
+     (eval 'EXPR)))
 
-(define (to-nat e)
+(define (eval e)
   (match e
-    [(cons 'expr e1) (to-nat e1)]
+    [(cons 'expr e1) (eval e1)]
     [(cons 'ZERO _)  0]
-    [(cons 'SUCC e1) (add1 (to-nat e1))]
+    [(cons 'SUCC e1) (add1 (eval e1))]
     [(cons 'PRED e1)
-     (let ([r (to-nat e1)])
+     (let ([r (eval e1)])
        (if (eq? r 0) 0 (sub1 r)))]
     [(cons 'ISZERO e1)
-       (eq? (to-nat e1) 0)]))
+     (eq? (eval e1) 0)]
+    [(cons 'IF (cons e1 (cons e2 e3)))
+     (let ([x (eval e1)])
+       (if x (eval e2) (eval e3)))]))
 
 (provide (rename-out [arith-mb #%module-begin])
          #%top-interaction
