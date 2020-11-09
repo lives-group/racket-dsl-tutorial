@@ -17,6 +17,9 @@
 (define-primop succ : (-> int int))
 (define-primop pred : (-> int int))
 (define-primop zero : int)
+(define-primop true : bool)
+(define-primop false : bool)
+(define-primop is-zero? : (-> int bool))
 
 (define-typerule (typed-app f e ...) ≫
   (⊢ f ≫ f- ⇒  (~-> tin ... tout))
